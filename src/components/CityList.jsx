@@ -1,6 +1,22 @@
 import styles from "./CityList.module.css";
-function CityList() {
-  return <ul styles={styles.CityList}>LIST</ul>;
+import Spinner from "./Spinner";
+import CityItem from "./Cityitem";
+import Message from "./Message";
+
+function CityList({ cities, isLoading }) {
+  if (isLoading) return <Spinner />;
+
+  if (!cities.length)
+    return (
+      <Message message="Add your first city by clicking on a city on the map" />
+    );
+  return (
+    <ul className={styles.CityList}>
+      {cities.map((city) => (
+        <CityItem city={city} key={city.id} />
+      ))}
+    </ul>
+  );
 }
 
 export default CityList;
